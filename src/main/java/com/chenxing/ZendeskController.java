@@ -36,7 +36,7 @@ public class ZendeskController {
         String jwt = JWT.create()
                 .withIssuedAt(new Date())
                 .withJWTId(UUID.randomUUID().toString())
-                .withClaim("eamil", "licx@easemob.com")
+                .withClaim("email", "licx@easemob.com")
                 .withClaim("name", "小星星")
                 .sign(Algorithm.HMAC256(JWT_SECRET));
         log.info("/zendesk/sso/login jwt:{} return_to:{}", returnTo, jwt);
