@@ -32,19 +32,20 @@ public class ZendeskController {
     }
 
     @RequestMapping("/zendesk/sso/login")
-    public String login(@RequestParam(name = "return_to", required = false) String returnTo) throws UnsupportedEncodingException {
+    public String login(@RequestParam(name = "return_to", required = false) String returnTo,
+                        @RequestParam(name = "email", required = false, defaultValue = "licx@easemob.com") String email) throws UnsupportedEncodingException {
         String jwt = JWT.create()
                 .withIssuedAt(new Date())
                 .withJWTId(UUID.randomUUID().toString())
-                .withClaim("email", "licx@easemob.com")
+                .withClaim("email", email)
                 .withClaim("name", "小星星")
                 .sign(Algorithm.HMAC256(JWT_SECRET));
-        log.info("/zendesk/sso/login jwt:{} return_to:{}", returnTo, jwt);
+        log.info("/zendesk/sso/login jwt:{} return_to:{} email:{}", returnTo, jwt, email);
         return "redirect:" + "https://chenxing.zendesk.com/access/jwt?jwt=" + jwt + "&return_to=" + returnTo;
     }
 
     @RequestMapping("/zendesk/sso/logout")
-    public Map<String, Object> logout(@RequestParam(name = "return_to", required = false) String returnTo) {
+    public @ResponseBody Map<String, Object> logout(@RequestParam(name = "return_to", required = false) String returnTo) {
         log.info("/zendesk/sso?return_to={}", returnTo);
         Map<String, Object> result = new HashMap<>();
         result.put("return_to", result);
