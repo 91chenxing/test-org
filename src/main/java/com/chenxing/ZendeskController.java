@@ -48,7 +48,7 @@ public class ZendeskController {
     public @ResponseBody Map<String, Object> logout(@RequestParam(name = "return_to", required = false) String returnTo) {
         log.info("/zendesk/sso?return_to={}", returnTo);
         Map<String, Object> result = new HashMap<>();
-        result.put("return_to", result);
+        result.put("return_to", returnTo);
         return result;
     }
 }
