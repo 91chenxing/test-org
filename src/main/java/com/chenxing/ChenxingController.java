@@ -46,7 +46,7 @@ public class ChenxingController {
                 .withClaim("name", "小星星")
                 .sign(Algorithm.HMAC256(JWT_SECRET));
         log.info("/chenxing/sso/login jwt:{} return_to:{} email:{}", returnTo, jwt, email);
-        return "redirect:" + "http://lee.kefu.chenxing.com:8080/v1/access/jwt?jwt=" + jwt + "&return_to=" + returnTo;
+        return "redirect:" + "http://lcx.kefu.chenxing.com:8080/v1/access/jwt?jwt=" + jwt + "&return_to=" + returnTo;
     }
 
     @RequestMapping("/chenxing/sso/logout")
